@@ -1,16 +1,20 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import rehypePrettyCode from "rehype-pretty-code";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import type { Components } from "react-markdown";
 
 interface MarkdownRendererProps {
   content: string;
 }
 
-const rehypePrettyCodeOptions = {
-  theme: "github-dark",
-  keepBackground: true,
-  defaultLang: "plaintext",
+const codeBlockStyle = {
+  ...oneDark,
+  'pre[class*="language-"]': {
+    ...oneDark['pre[class*="language-"]'],
+    margin: 0,
+    background: "#0d1117",
+  },
 };
 
 const components: Components = {
@@ -32,16 +36,39 @@ const components: Components = {
       loading="lazy"
     />
   ),
+  pre: ({ children }) => <div className="code-block">{children}</div>,
+  code: ({ className, children }) => {
+    const match = /language-(\w+)/.exec(className ?? "");
+    const code = String(children).replace(/\n$/, "");
+
+    if (match) {
+      return (
+        <SyntaxHighlighter
+          language={match[1]}
+          style={codeBlockStyle}
+          PreTag="div"
+          customStyle={{
+            margin: 0,
+            padding: "1em 1.25em",
+            borderRadius: "0.5rem",
+            border: "1px solid rgba(111, 190, 178, 0.3)",
+            fontSize: "0.875rem",
+            lineHeight: 1.6,
+          }}
+        >
+          {code}
+        </SyntaxHighlighter>
+      );
+    }
+
+    return <code className={className}>{children}</code>;
+  },
 };
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
     <article className="lesson-prose">
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[[rehypePrettyCode, rehypePrettyCodeOptions]]}
-        components={components}
-      >
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {content}
       </ReactMarkdown>
     </article>
