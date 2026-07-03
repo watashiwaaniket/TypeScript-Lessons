@@ -8,8 +8,8 @@ export default function Layout() {
         aria-hidden
       />
 
-      <div className="relative h-full overflow-y-auto flex justify-center">
-        <div className="w-full max-w-xl sm:max-w-2xl md:max-w-6xl min-h-full bg-[#0B0909] border-x border-[#6FBEB2] text-[#A5E9DD] p-4 sm:p-6 md:p-8 flex flex-col gap-6">
+      <div className="relative h-full overflow-y-auto">
+        <div className="mx-auto w-full max-w-xl sm:max-w-2xl md:max-w-6xl min-h-dvh bg-[#0B0909] border-x border-[#6FBEB2] text-[#A5E9DD] p-4 sm:p-6 md:p-8 flex flex-col gap-6">
           <header className="flex flex-col gap-1.5 border-b border-[#6FBEB2]/40 pb-6">
             <Link
               to="/"
@@ -34,7 +34,7 @@ export default function Layout() {
             </section>
           </header>
 
-          <main className="flex-1">
+          <main>
             <Outlet />
           </main>
         </div>
