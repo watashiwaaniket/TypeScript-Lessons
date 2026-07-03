@@ -82,3 +82,28 @@ React exports event types. Typing the handler makes `event.target` safe to use.
 - React + TypeScript basics: type Props, State, and Events
 - Define prop types first — it stabilizes component design
 - Explicit `useState` and event types catch bugs early
+
+## Exercises
+
+### 1. Type a `Badge` component
+
+Create props: `label: string`, optional `variant: "default" | "success" | "danger"` (default `"default"`). Render the label inside a `<span>`.
+
+### 2. Union state
+
+```tsx
+const [status, setStatus] = useState<"idle" | "loading" | "done">("idle");
+```
+
+Write a small component that shows different text for each status and has a button that cycles through them.
+
+### 3. Type an input handler
+
+Type an `onChange` handler for `<input type="text">` using `ChangeEvent<HTMLInputElement>`. Log `event.target.value` on each keystroke.
+
+<details>
+<summary>Answers</summary>
+
+No single solution — confirm there are no type errors and props/state/events are fully typed.
+
+</details>

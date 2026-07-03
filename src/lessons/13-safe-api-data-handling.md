@@ -75,3 +75,53 @@ function isUserArray(value: unknown): value is User[] {
 - Receive API data as `unknown` first
 - Validate with type guards before passing to business logic
 - Default stance: **never trust external input**
+
+## Exercises
+
+### 1. Type guard for `Post`
+
+```ts
+type Post = { id: number; title: string; published: boolean };
+```
+
+Write `isPost(value: unknown): value is Post` that checks all three fields.
+
+### 2. Invalid data
+
+Which values should `isPost` reject?
+
+```ts
+{ id: 1, title: "Hello" }                    // missing published
+{ id: "1", title: "Hello", published: true } // wrong id type
+null
+[]
+```
+
+### 3. Safe fetch wrapper
+
+Sketch `async function fetchPost(): Promise<Post>` that:
+
+1. Calls `fetch("/api/post")` and parses JSON as `unknown`
+2. Validates with `isPost`
+3. Throws if invalid, otherwise returns the `Post`
+
+<details>
+<summary>Answers</summary>
+
+**2.** All four should be rejected.
+
+**1 & 3.** Example guard:
+
+```ts
+function isPost(value: unknown): value is Post {
+  if (typeof value !== "object" || value === null) return false;
+  const v = value as Record<string, unknown>;
+  return (
+    typeof v.id === "number" &&
+    typeof v.title === "string" &&
+    typeof v.published === "boolean"
+  );
+}
+```
+
+</details>

@@ -61,3 +61,44 @@ Empty arrays and similar cases don't communicate your intent — annotate them.
 - Type annotations make types explicit
 - Type inference reduces boilerplate when the type is obvious
 - Use both: annotate when needed, infer when it's clear
+
+## Exercises
+
+### 1. Annotate or infer?
+
+For each variable, decide whether an explicit annotation is needed. Add one only where inference is too weak.
+
+```ts
+const appName = "TypeScript Lessons";
+const scores = [];
+const scores2 = [95, 87, 100];
+function double(n: number) {
+  return n * 2;
+}
+const doubled = double(5);
+```
+
+### 2. Fix the function
+
+This function should accept a `string` and return a `string`, but something is missing. Add the right types.
+
+```ts
+function shout(message) {
+  return message.toUpperCase() + "!";
+}
+```
+
+### 3. Predict the error
+
+What happens if you call `greet(42)` after typing `greet` correctly as `(name: string) => string`?
+
+<details>
+<summary>Answers</summary>
+
+**1.** `appName` and `scores2` and `doubled` can be inferred. `scores` needs `const scores: number[] = []` (or similar) because `[]` alone is inferred as `never[]`.
+
+**2.** `function shout(message: string): string { ... }`
+
+**3.** TypeScript reports an error — `number` is not assignable to `string`.
+
+</details>

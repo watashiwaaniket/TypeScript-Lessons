@@ -84,3 +84,38 @@ type FetchState =
 - Union types represent multiple possible types
 - Literal types lock a type to specific values
 - Great for status, modes, roles, and any data with a fixed set of choices
+
+## Exercises
+
+### 1. Model a theme switcher
+
+Define `type Theme = "light" | "dark" | "system"` and a function `setTheme(theme: Theme): void` that logs the theme. Try calling it with `"light"` and with `"neon"` — which call fails?
+
+### 2. Build a `FetchState` union
+
+Write a discriminated union for API state with four variants:
+
+- `idle` — only `status`
+- `loading` — only `status`
+- `success` — `status` + `data: string[]`
+- `error` — `status` + `message: string`
+
+### 3. Widen vs narrow
+
+```ts
+type Role = "admin" | "editor" | "viewer";
+let role: Role = "admin";
+let loose: string = role; // A
+role = loose; // B
+```
+
+Which line (A or B) is allowed without a type assertion, and why?
+
+<details>
+<summary>Answers</summary>
+
+**1.** `"neon"` fails — it's not in the `Theme` union.
+
+**3.** Line A is allowed. A `Role` is a valid `string`, so assigning to `string` is safe. Line B is not — `loose` could be any string, not necessarily a valid `Role`.
+
+</details>

@@ -73,3 +73,38 @@ This derives a Union type from the array values safely.
 - Type assertions help when inference falls short
 - `as const` locks values as literals
 - Prefer type guards first; reach for assertions only when necessary
+
+## Exercises
+
+### 1. Derive a union from `as const`
+
+```ts
+const sizes = ["sm", "md", "lg"] as const;
+type Size = (typeof sizes)[number];
+```
+
+What is the type of `Size`? Try assigning `const s: Size = "xl"` — what error do you get?
+
+### 2. DOM assertion
+
+Type this safely with an assertion and a null check:
+
+```ts
+const input = document.querySelector("#email");
+// access input.value only when input exists
+```
+
+### 3. Assertion vs type guard
+
+When would you prefer a type guard over `value as User`? Give one concrete example (e.g. API data).
+
+<details>
+<summary>Answers</summary>
+
+**1.** `Size` is `"sm" | "md" | "lg"`. `"xl"` is not assignable.
+
+**2.** Example: `const input = document.querySelector("#email") as HTMLInputElement | null; if (input) console.log(input.value);`
+
+**3.** API responses — assertions don't validate runtime shape; type guards do.
+
+</details>

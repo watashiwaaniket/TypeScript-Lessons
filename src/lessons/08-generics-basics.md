@@ -77,3 +77,26 @@ function printLength<T extends { length: number }>(value: T): void {
 - Generics treat types as parameters
 - They balance reuse and type safety
 - Start with generic functions and generic types — they'll come up constantly
+
+## Exercises
+
+### 1. Generic `lastItem`
+
+Write `function lastItem<T>(items: T[]): T | undefined` and test it with `number[]` and `string[]`. What type does TypeScript infer for each result?
+
+### 2. Generic `ApiResponse`
+
+Define `type ApiResponse<T> = { data: T; status: number }` and create one response for a `User` and one for `string[]`.
+
+### 3. Constrained generic
+
+Implement `function getLength<T extends { length: number }>(value: T): number` that returns `value.length`. Try it with a `string` and with `{ length: 10, label: "box" }`. What happens if you pass a `number`?
+
+<details>
+<summary>Answers</summary>
+
+**1.** `lastItem([1, 2, 3])` → `number | undefined`; `lastItem(["a"])` → `string | undefined`.
+
+**3.** `number` fails — it has no `length` property, so it doesn't satisfy the constraint.
+
+</details>

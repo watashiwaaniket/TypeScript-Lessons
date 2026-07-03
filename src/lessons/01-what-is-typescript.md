@@ -162,3 +162,36 @@ npm run typecheck
 - Types describe data kinds and help prevent unintended values
 - `tsc` handles type checking and compilation
 - `tsc --noEmit` is especially useful for final verification
+
+## Exercises
+
+### 1. Spot the type error
+
+Which line would TypeScript flag, and why?
+
+```ts
+const price: number = 29.99;
+const label: string = "Sale";
+price + label;
+label.toUpperCase();
+price.toFixed(2);
+```
+
+### 2. Static vs dynamic
+
+In your own words, explain the difference between a bug caught by TypeScript at build time and one that only appears when JavaScript runs in the browser.
+
+### 3. Try `tsc --noEmit`
+
+Create a small `.ts` file with one intentional type mistake. Run `npm exec tsc --noEmit` (or `npm run typecheck` if your project has the script) and read the error message. Fix the mistake and run it again until it passes.
+
+<details>
+<summary>Answers</summary>
+
+**1.** `price + label` — you're adding a `number` and a `string`. TypeScript flags incompatible operations. `label.toUpperCase()` and `price.toFixed(2)` are fine on their respective types.
+
+**2.** Sample answer: TypeScript checks types while you write/build, before users see anything. JavaScript only fails at runtime when the bad code actually executes.
+
+**3.** No single answer — the goal is to see a real compiler error and fix it.
+
+</details>

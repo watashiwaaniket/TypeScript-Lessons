@@ -78,3 +78,28 @@ Intersection (`&`) merges both sets of properties into one type.
 - Both `type` and `interface` help you reuse type definitions
 - For most cases, either is fine
 - There are subtle differences — search "type vs interface TypeScript" if you're curious
+
+## Exercises
+
+### 1. Extend with `interface`
+
+Define `interface Named { name: string }` and `interface Employee extends Named { employeeId: string; department: string }`. Create a sample `employee` object.
+
+### 2. Intersect with `type`
+
+Define `type Timestamped = { createdAt: string; updatedAt: string }` and `type BlogPost = { title: string; body: string } & Timestamped`.
+
+### 3. Union with `type` only
+
+Try rewriting this as an `interface` — why doesn't it work?
+
+```ts
+type Result = { ok: true; value: number } | { ok: false; error: string };
+```
+
+<details>
+<summary>Answers</summary>
+
+**3.** Interfaces describe a single object shape. A union of two different shapes (`ok: true` vs `ok: false` with different fields) requires `type`, not `interface`.
+
+</details>

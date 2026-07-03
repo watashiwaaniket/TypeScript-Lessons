@@ -95,3 +95,46 @@ After the guard, `message` is no longer `null`. Hover to verify.
 - Narrowing is key to using Union types safely
 - Start with `typeof`, `in`, and discriminated unions
 - Especially powerful for React conditional rendering and API response handling
+
+## Exercises
+
+### 1. Complete `formatId`
+
+Fill in the branches so each type is handled safely:
+
+```ts
+function formatId(id: string | number): string {
+  if (typeof id === "string") {
+    // return uppercased string
+  }
+  // return id as a zero-padded string, e.g. 7 -> "007"
+}
+```
+
+### 2. Discriminated union renderer
+
+Using the `FetchState` type from lesson 4, write `renderState(state: FetchState): string` with a `switch` on `state.status`. Return a different message per case, and use `state.data` or `state.message` where available.
+
+### 3. Null guard
+
+```ts
+type Profile = { username: string };
+
+function greetUser(profile: Profile | null): string {
+  // add a guard, then return `Hello, ${profile.username}`
+}
+```
+
+<details>
+<summary>Answers</summary>
+
+**1.** Example:
+
+```ts
+if (typeof id === "string") return id.toUpperCase();
+return String(id).padStart(3, "0");
+```
+
+**3.** `if (profile === null) return "Guest";` then `return \`Hello, ${profile.username}\`;`
+
+</details>

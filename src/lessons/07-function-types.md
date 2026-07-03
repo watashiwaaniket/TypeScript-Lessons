@@ -66,3 +66,30 @@ function runTask(onSuccess: OnSuccess): void {
 - Function types express a calling contract
 - Typing arguments, return values, and callbacks improves safety
 - Function signatures `(argTypes) => returnType` are especially important
+
+## Exercises
+
+### 1. Type a callback
+
+Define `type FilterFn = (value: number) => boolean` and implement `filterNumbers(values: number[], fn: FilterFn): number[]` that returns only values where `fn` returns `true`.
+
+### 2. Optional and default
+
+Write `function createLabel(text: string, prefix?: string): string` that returns `prefix ? \`${prefix}: ${text}\` : text`. Call it with one argument and with two.
+
+### 3. Match the signature
+
+Which functions satisfy `type MathOp = (a: number, b: number) => number`?
+
+```ts
+const add = (a: number, b: number) => a + b;
+const log = (a: number, b: number) => console.log(a + b);
+const greet = (name: string) => `Hi, ${name}`;
+```
+
+<details>
+<summary>Answers</summary>
+
+**3.** Only `add`. `log` returns `void`, not `number`. `greet` has the wrong parameter type and return type.
+
+</details>

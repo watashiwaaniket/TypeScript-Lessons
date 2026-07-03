@@ -88,3 +88,41 @@ Annotating the argument as `Lesson` enforces a consistent data structure. `print
 - TypeScript basics are about **shape**, not just values
 - Primitives, arrays, and object types cover most everyday code
 - Naming types with `type` improves readability and safety
+
+## Exercises
+
+### 1. Define a `Book` type
+
+Create a `type Book` with:
+
+- `title` (string)
+- `pages` (number)
+- `tags` (array of strings)
+- `isPublished` (boolean)
+
+Then create a `const book: Book` with sample data.
+
+### 2. Find the mistakes
+
+Which assignments would fail?
+
+```ts
+type Product = { id: number; name: string };
+const p: Product = { id: "1", name: "Keyboard" };
+const ids: number[] = [1, 2, 3];
+ids.push("four");
+const flag: boolean = "true";
+```
+
+### 3. Type a function argument
+
+Write a `type Point = { x: number; y: number }` and a function `distanceFromOrigin(point: Point): number` that returns `Math.sqrt(point.x ** 2 + point.y ** 2)`.
+
+<details>
+<summary>Answers</summary>
+
+**2.** All three fail: `id` must be a `number`, `ids.push("four")` adds a string to `number[]`, and `flag` must be `true`/`false` not a string.
+
+**1 & 3.** Check your editor — if there are no red squiggles, you're good.
+
+</details>

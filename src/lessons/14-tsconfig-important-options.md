@@ -71,3 +71,35 @@ Forces explicit handling of `null` and `undefined`, reducing "accessing somethin
 
 - Start with `strict`, `noImplicitAny`, and `strictNullChecks`
 - Build deeper understanding of other options over time
+
+## Exercises
+
+### 1. What does `strict` enable?
+
+Look up (or toggle) what `strict: true` turns on besides `strictNullChecks` and `noImplicitAny`. Name two other flags it includes.
+
+### 2. Predict with `strictNullChecks`
+
+With `strictNullChecks: true`, which lines error?
+
+```ts
+let name: string = null;
+function greet(user: { name: string } | null) {
+  console.log(user.name);
+}
+```
+
+### 3. Fix the null access
+
+Rewrite `greet` so it safely handles `null` — either return early or provide a fallback string.
+
+<details>
+<summary>Answers</summary>
+
+**1.** Examples: `strictFunctionTypes`, `strictBindCallApply`, `strictPropertyInitialization`, `noImplicitThis`, `alwaysStrict`, `useUnknownInCatchVariables`.
+
+**2.** Both lines error — `null` isn't assignable to `string`, and `user` may be `null`.
+
+**3.** Example: `if (user === null) return; console.log(user.name);`
+
+</details>

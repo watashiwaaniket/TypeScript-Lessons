@@ -67,3 +67,46 @@ Functions that always throw or loop forever have return type `never` — they ne
 - `any` — disables checking; use sparingly
 - `void` — no return value
 - `never` — unreachable / never returns
+
+## Exercises
+
+### 1. `unknown` vs `any`
+
+Why does `value.toUpperCase()` fail on `unknown` but not on `any`? Rewrite this safely using a `typeof` check:
+
+```ts
+function safeUpper(value: unknown): string {
+  // narrow, then return uppercased string or "N/A"
+}
+```
+
+### 2. Pick the return type
+
+What return type fits each function?
+
+```ts
+function log(msg: string) { console.log(msg); }
+function fail(msg: string) { throw new Error(msg); }
+function loop(): never { while (true) {} }
+```
+
+### 3. Refactor away from `any`
+
+```ts
+function parseJson(raw: string): any {
+  return JSON.parse(raw);
+}
+```
+
+Change the return type to something safer. What trade-off do you accept?
+
+<details>
+<summary>Answers</summary>
+
+**1.** `unknown` requires narrowing before use; `any` opts out of checking. Example: `if (typeof value === "string") return value.toUpperCase(); return "N/A";`
+
+**2.** `log` → `void`, `fail` → `never`, `loop` → `never`.
+
+**3.** `unknown` is the safer return type — callers must validate before using the parsed value.
+
+</details>

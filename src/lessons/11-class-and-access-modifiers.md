@@ -85,3 +85,30 @@ class Dog extends Animal {
 - Classes bundle data and behavior
 - Access modifiers control what can be changed and from where
 - `private`, `protected`, and `readonly` help you build safer designs
+
+## Exercises
+
+### 1. Encapsulate a counter
+
+Create a `Counter` class with:
+
+- `private count: number` (starts at 0)
+- `increment(): void`
+- `getValue(): number`
+
+Verify that `counter.count` is not accessible from outside the class.
+
+### 2. `readonly` id
+
+Add a `readonly id: string` set in the constructor. Try reassigning `id` after construction — what error appears?
+
+### 3. `protected` in a subclass
+
+Extend the `Animal` / `Dog` example from the lesson with a `Cat` class that uses `this.name` in a `meow()` method.
+
+<details>
+<summary>Answers</summary>
+
+**1–3.** If your editor shows errors on invalid access and none on valid usage, you've got it.
+
+</details>
